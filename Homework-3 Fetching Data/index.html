@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title></title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="">
+  </head>
+  <body>
+    <h3>The Three Little Pigs</h3>
+
+        <button type='button' id='prev'>Previous Page</button>
+
+        <button type='button' id='next'>Next Page</button>
+
+      <pre>
+
+      </pre>
+
+
+    <!--[if lt IE 7]>
+      <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="#">upgrade your browser</a> to improve your experience.</p>
+    <![endif]-->
+    
+    <script>
+      
+      //variable to keep track of what page the user is on
+      var currentPage = 1;
+      // console.log(currentPage)
+
+      var pageText = document.querySelector('pre')
+      var prevButton = document.getElementById('prev')
+      var nextButton = document.getElementById('next')
+
+      //function for next button
+      function nextPage(){
+        //makes sure you cannot go past the end of the story
+        if (currentPage < 7){
+        //newPage is the next page i want to fetch from 
+        var newPage = currentPage + 1;
+        var url = "page" + newPage + '.txt';
+        fetch(url).then(function(response){
+          response.text().then(function(text){
+            pageText.textContent = text;
+            // console.log(newPage)
+
+          });
+        });
+        currentPage=newPage;
+      }
+      }
+      //function for previous button
+      function previousPage(){
+        //makes sure you cant go before the first page
+        if (currentPage > 1){
+        //newPage is the previous page you want to fetch from
+        var newPage = currentPage - 1;
+        var url = "page" + newPage + '.txt';
+        fetch(url).then(function(response){
+          response.text().then(function(text){
+            pageText.textContent = text;
+            // console.log(newPage)
+
+          });
+        });
+        currentPage=newPage;
+        }
+
+      }
+      nextButton.onclick = function(){
+        nextPage();
+      }
+      prevButton.onclick = function(){
+        previousPage();
+      }
+      //onload function to get page 1 when you open the page
+      function onLoad(){
+        fetch('page1.txt').then(function(response){
+          response.text().then(function(text){
+            pageText.textContent = text;
+          });
+        });
+      }
+      onLoad();
+
+    </script>
+</body>
+</html>
