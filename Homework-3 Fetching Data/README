@@ -1,0 +1,6 @@
+Steps to run the app.
+1. Download all files into a folder.
+2. Run a local server (I used python 3 for my server and in my terminal I typed 'python -m http.server' to start my server)
+3. After your server starts, it should tell you what port it is open on (for me it was on 8000)
+4. Go to a web browser and type in 'localhost:8000'
+5. If you see part of the story on screen then you should be able to use the next and prev buttons to read the story. 
