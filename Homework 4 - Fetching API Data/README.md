@@ -1,3 +1,5 @@
+In this weather app, you can search for a city and it will give you the weather for the next five days and provides you with the temperature and weather description
+
 Steps to Run this app.
 1. Download the index file.
 2. Go to the openWeatherMap website and sign up for an api key.
