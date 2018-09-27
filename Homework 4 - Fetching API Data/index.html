@@ -38,8 +38,9 @@
                 return parent.appendChild(el); // Append the second parameter(element) to the first one
             }
             const ul = document.getElementById('days');
-            var api_key = '2266cd2f7f1be9185712ec88e3303ae3';
-
+            var api_key = 'USE OWN KEY HERE';
+            
+            //creates the url for the fetch 
             function cityWeatherSearch(location){
                 const url = `https://api.openweathermap.org/data/2.5/forecast?q=${location},US&appid=${api_key}`
                 console.log(url);
@@ -53,6 +54,7 @@
                 })
                 
             }
+            //parses through all the data and organizes it
             function displayData(data){
                 var city_name = data.city.name;
                 var city_data = data.list;
@@ -85,12 +87,13 @@
                 }
                 console.log(five_day_forecast);
             }
+            //converts kelvin to fahrenheit
             function convertToFahrenheit(K){
                 return Math.round(((K-273.15)*1.8)+32);
             }
+            //takes input from search bar and searches
             function searchCity(){
                 var city = document.getElementById("searchbar").value;
-                console.log(city)
                 cityWeatherSearch(city);
             }
 
