@@ -1,0 +1,102 @@
+<<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>
+            Weather App
+        </title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="">
+    </head>
+    <body>
+        <!--[if lt IE 7]>
+            <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="#">upgrade your browser</a> to improve your experience.</p>
+        <![endif]-->
+        
+            <h3>Weather App</h3>
+            <p>Enter a city for a 5-day forecast</p>
+            
+            <input id = "searchbar" type="text"
+             placeholder="Please Enter a city"/>
+            <button type="button" onclick="searchCity()">Search</button>
+             <h2></h2>
+            <ul id="days">
+
+            </ul>
+
+        <script>
+            function createNode(element) {
+                return document.createElement(element); // Create the type of element you pass in the parameters
+            }
+
+            function append(parent, el) {
+                return parent.appendChild(el); // Append the second parameter(element) to the first one
+            }
+            const ul = document.getElementById('days');
+            var api_key = '2266cd2f7f1be9185712ec88e3303ae3';
+
+            function cityWeatherSearch(location){
+                const url = `https://api.openweathermap.org/data/2.5/forecast?q=${location},US&appid=${api_key}`
+                console.log(url);
+
+                fetch(url)
+                    .then(function(response){
+                        return response.json();
+                })
+                .then(function(myJson){
+                    displayData(myJson);
+                })
+                
+            }
+            function displayData(data){
+                var city_name = data.city.name;
+                var city_data = data.list;
+                var five_day_forecast = []
+                //console.log(city_name,city_data);
+                var noon_time = 0;
+                let city = createNode('h3')
+                city.innerHTML = `${city_name}`
+                append(ul,city);
+                for (var i=0;i<5;i++){
+                    var current_day = city_data[noon_time+(i*8)]
+                    five_day_forecast.push(city_data[noon_time+(i*8)])
+                    let li = createNode('li'),
+                        date = createNode('div'),
+                        time = createNode('div'),
+                        temperature = createNode('div'),
+                        weather = createNode('div');
+
+                    let day = []
+                    day = current_day.dt_txt.split(" ")
+                    date.innerHTML = `Date: ${day[0]}`
+                    time.innerHTML = `Time: ${day[1]}`
+                    temperature.innerHTML = `Temperature: ${convertToFahrenheit(current_day.main.temp)} degrees`
+                    weather.innerHTML = `Description: ${current_day.weather[0].description}`
+                    append(li, date);
+                    append(li, time);
+                    append(li, temperature);
+                    append(li, weather);
+                    append(ul, li);
+                }
+                console.log(five_day_forecast);
+            }
+            function convertToFahrenheit(K){
+                return Math.round(((K-273.15)*1.8)+32);
+            }
+            function searchCity(){
+                var city = document.getElementById("searchbar").value;
+                console.log(city)
+                cityWeatherSearch(city);
+            }
+
+            
+            
+
+        </script>
+    </body>
+</html>
