@@ -2,7 +2,7 @@
 
 This is a bot that uses twitter to post the #1 trending video on youtube in a random country. The bot pulls from the currently 91 available contries from the youtube api. Once started, the bot will post automatically every hour.
 
-## Steps to run this app
+## Steps to run this bot
 
 1. You will first need to apply for a Twitter developer's key and sign up for a youtube api key.
 2. You will also need Nodejs installed and install the 'Twit' package using a command such as 'npm install Twit' in your terminal.
