@@ -6,7 +6,6 @@ const API_KEY = require('./youtubeKey.js')
 
 
 function PostVideo(){
-    console.log("I am running");
     const url = `https://www.googleapis.com/youtube/v3/i18nRegions?part=snippet&key=${API_KEY}`
     fetch(url)
         .then(response => response.json())
@@ -29,12 +28,13 @@ function PostVideo(){
                     var viewCount = getViews(myJson);
                     var getCommentCount = getComments(myJson);
                     var postText = `"${title}" is currently the number 1 trending video in ${regionName} with ${viewCount} views and ${getCommentCount} comments. ${postURL}`
-                    console.log(postText);
                     return postText;
                 })
                 .then(function(text){
                     T.post('statuses/update', { status: `${text}` }, function(err, data, response) {
-                         })
+                        console.log(text)
+                        console.log("post has been made")    
+                    })
                     })
         })
 }
