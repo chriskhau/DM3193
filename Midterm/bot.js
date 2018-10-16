@@ -2,7 +2,7 @@ const fetch = require('node-fetch')
 var Twit = require('twit');
 var config = require('./config.js');
 var T = Twit(config);
-const API_KEY = 'AIzaSyCAOVx1_RFldCy3o9GYOJga35qxONd5AyM'
+const API_KEY = require('./youtubeKey.js')
 
 
 function PostVideo(){
