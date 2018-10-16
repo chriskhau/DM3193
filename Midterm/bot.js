@@ -28,7 +28,7 @@ function PostVideo(){
                     var postURL = getPostURL(myJson);
                     var viewCount = getViews(myJson);
                     var getCommentCount = getComments(myJson);
-                    var postText = `'${title}' is currently the number 1 trending video in ${regionName} with ${viewCount} views and ${getCommentCount} comments. ${postURL}`
+                    var postText = `"${title}" is currently the number 1 trending video in ${regionName} with ${viewCount} views and ${getCommentCount} comments. ${postURL}`
                     console.log(postText);
                     return postText;
                 })
