@@ -4,7 +4,6 @@ var config = require('./config.js');
 var T = Twit(config);
 const API_KEY = require('./youtubeKey.js')
 
-
 function PostVideo(){
     const url = `https://www.googleapis.com/youtube/v3/i18nRegions?part=snippet&key=${API_KEY}`
     fetch(url)
