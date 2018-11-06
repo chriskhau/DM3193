@@ -1,0 +1,54 @@
+<!<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title></title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="">
+        <style>
+            a{text-decoration: none;
+            color:black}
+            a:hover{
+                text-decoration: underline
+            }
+            a:visited{color:black}
+        </style>
+    </head>
+    <body>
+        <form action="/" method="post">
+            <input name="search" type="text" class="ghost-input" placeholder="Search for Video" required>
+            <input type="submit" class="ghost-button" value="Search">
+          </form>
+
+          <% if(videoList !== null){ %>
+            <% for(var i=0;i<videoList.length;i++) { %>
+                <div style="border:1px; border-style:solid">
+                    
+                <ul>
+                        <a href= "https://www.youtube.com/watch?v=<%=videoList[i].id.videoId %>" target="_blank">
+                <li style="list-style: none">
+                    <img src=
+                        <%=videoList[i].snippet.thumbnails.default.url %>
+                    />
+                    
+                        <h2>Title: <%=videoList[i].snippet.title %></h2>                
+                    
+                    <p>Description: <%=videoList[i].snippet.description%></p>
+
+                        </li>
+                    </a>
+                    </ul> 
+
+                </div>
+                <% } %>
+              <% } %>
+
+
+
+    </body>
+</html>
