@@ -1,0 +1,129 @@
+<!doctype html>
+<html>
+  <head>
+    <title>Connect Four</title>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  </head>
+  <body>
+    <h1 id="player"></h1>
+    <h2 id="currentTurn"></h2>
+
+    <button onclick="setCol1()">Col 1</button>
+    <button onclick="setCol2()">Col 2</button>
+    <button onclick="setCol3()">Col 3</button>
+    <button onclick="setCol4()">Col 4</button>
+    <button onclick="setCol5()">Col 5</button>
+    <button onclick="setCol6()">Col 6</button>
+    <button onclick="setCol7()">Col 7</button>
+
+    <table>
+        <tr>
+            <td id = "c1r6">0</td>
+            <td id = "c2r6">0</td>
+            <td id = "c3r6">0</td>
+            <td id = "c4r6">0</td>
+            <td id = "c5r6">0</td>
+            <td id = "c6r6">0</td>
+            <td id = "c7r6">0</td>
+        </tr>
+        <tr>
+            <td id = "c1r5">0</td>
+            <td id = "c2r5">0</td>
+            <td id = "c3r5">0</td>
+            <td id = "c4r5">0</td>
+            <td id = "c5r5">0</td>
+            <td id = "c6r5">0</td>
+            <td id = "c7r5">0</td>
+        </tr>
+        <tr>
+            <td id = "c1r4">0</td>
+            <td id = "c2r4">0</td>
+            <td id = "c3r4">0</td>
+            <td id = "c4r4">0</td>
+            <td id = "c5r4">0</td>
+            <td id = "c6r4">0</td>
+            <td id = "c7r4">0</td>
+        </tr>
+        <tr>
+            <td id = "c1r3">0</td>
+            <td id = "c2r3">0</td>
+            <td id = "c3r3">0</td>
+            <td id = "c4r3">0</td>
+            <td id = "c5r3">0</td>
+            <td id = "c6r3">0</td>
+            <td id = "c7r3">0</td>
+        </tr>
+        <tr>
+            <td id = "c1r2">0</td>
+            <td id = "c2r2">0</td>
+            <td id = "c3r2">0</td>
+            <td id = "c4r2">0</td>
+            <td id = "c5r2">0</td>
+            <td id = "c6r2">0</td>
+            <td id = "c7r2">0</td>
+        </tr>
+        <tr>
+            <td id = "c1r1">0</td>
+            <td id = "c2r1">0</td>
+            <td id = "c3r1">0</td>
+            <td id = "c4r1">0</td>
+            <td id = "c5r1">0</td>
+            <td id = "c6r1">0</td>
+            <td id = "c7r1">0</td>
+        </tr>                    
+
+    </table>
+
+
+    <script src="/socket.io/socket.io.js"></script>
+
+    <script>
+        var socket = io();
+        var currentTurn = false;
+        var pieceLocation = '';
+
+        socket.on('player', function(data){
+            $('#player').html(data.msg);
+        })
+        socket.on('playerTurn',function(data){
+            $('#currentTurn').html(data.msg);
+        })
+        socket.on('turnCounter',function(data){
+            var turn = data.currentTurn
+            
+        })
+        socket.on('board',function(data){
+            pieceLocation = `c${data.col}r${data.row}`
+            console.log(pieceLocation);
+            $(`#${pieceLocation}`).html(data.number)
+
+        })
+
+        var setCol1 = function(){
+            socket.emit('set col 1')
+        }
+        var setCol2 = function(){
+            socket.emit('set col 2')
+        }
+        var setCol3 = function(){
+            socket.emit('set col 3')
+        }        
+        var setCol4 = function(){
+            socket.emit('set col 4')
+        }        
+        var setCol5 = function(){
+            socket.emit('set col 5')
+        }        
+        var setCol6 = function(){
+            socket.emit('set col 6')
+        }        
+        var setCol7 = function(){
+            socket.emit('set col 7')
+        }   
+
+        
+        
+    </script>
+  </body>
+</html>
